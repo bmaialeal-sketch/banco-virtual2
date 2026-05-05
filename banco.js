@@ -1,5 +1,5 @@
 // banco.js - Sistema de Banco Virtual
-let titulo = "SISTEMA DE TAREFAS";
+let nomeBanco = "BANCO DIGITAL PLUS"; // <- linha do conflito
 let contas = [];
 function criarConta(titular, saldoInicial) {
   let conta = { titular: titular, saldo: saldoInicial, ativa: true };
@@ -33,3 +33,46 @@ console.log("Total: "+total+" | Feitas: "+feitas);
 }
 // Teste final
 resumo();
+function encerrarConta(indice) {
+if (indice < 1 || indice > contas.length) {
+console.log("Conta não encontrada."); return;
+}
+contas[indice - 1].ativa = false;
+console.log("Conta de " + contas[indice-1].titular + " encerrada.");
+}
+// Teste
+criarConta("Carla Mendes", 750);
+encerrarConta(2);
+listarContas();
+
+function depositar(indice, valor) {
+  if (indice < 1 || indice > contas.length) {
+    console.log("Conta não encontrada.");
+    return;
+  }
+  contas[indice - 1].saldo += valor;
+  console.log(
+    "Depósito de R$ " +
+      valor.toFixed(2) +
+      " para " +
+      contas[indice - 1].titular,
+  );
+}
+function sacar(indice, valor) {
+  if (indice < 1 || indice > contas.length) {
+    console.log("Conta não encontrada.");
+    return;
+  }
+  let c = contas[indice - 1];
+  if (c.saldo < valor) {
+    console.log("Saldo insuficiente!");
+    return;
+  }
+  c.saldo -= valor;
+  console.log("Saque de R$ " + valor.toFixed(2) + " da conta de " + c.titular);
+}
+// Teste
+criarConta("Bruno Costa", 500);
+depositar(1, 200);
+sacar(2, 100);
+listarContas();
