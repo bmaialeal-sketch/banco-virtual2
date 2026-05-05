@@ -1,5 +1,5 @@
 // banco.js - Sistema de Banco Virtual
-let nomeBanco = "BANCO DIGITAL"; // <- linha do conflito
+let titulo = "SISTEMA DE TAREFAS";
 let contas = [];
 function criarConta(titular, saldoInicial) {
   let conta = { titular: titular, saldo: saldoInicial, ativa: true };
@@ -24,3 +24,12 @@ function listarContas() {
 // Teste inicial
 criarConta("Ana Silva", 1000);
 listarContas();
+
+function resumo() {
+let total = tarefas.length;
+let feitas = tarefas.filter(t => t.concluida).length;
+console.log("=== " + titulo + " ===");
+console.log("Total: "+total+" | Feitas: "+feitas);
+}
+// Teste final
+resumo();
